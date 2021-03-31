@@ -32,7 +32,7 @@ def register(request):
     def remove_spaces(string):
         return string.replace(" ", "%20")
 
-    with urllib.request.urlopen(f'https://{user.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{remove_spaces(user.summonername)}?api_key={os.environ['api_key']}') as response:
+    with urllib.request.urlopen(f'https://{user.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{remove_spaces(user.summonername)}?api_key={os.environ["api_key"]}') as response:
         html = response.read()
         data = loads(html)
         user.accountId = data["accountId"]

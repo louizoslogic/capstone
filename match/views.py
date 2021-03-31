@@ -49,7 +49,7 @@ def updatedb(request):
 
 def update_database(User):
     print('hellworld')
-    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/{User.accountId}?api_key={api_key}') as response:
+    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/{User.accountId}?api_key={os.environ["api_key"]}') as response:
         html = response.read()
         data = loads(html)
         matches = list(get_matches(User))
@@ -147,7 +147,7 @@ def create_participants(data, match, user):
 
 def get_match_info(match, user):
 
-    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matches/{match.matchid}?api_key={os.environ['api_key']}') as response:
+    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matches/{match.matchid}?api_key={os.environ["api_key"]}') as response:
         html = response.read()
         data = loads(html)
 
