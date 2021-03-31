@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from secret import api_key
+import os
 from .models import Match, Participant
 import urllib.request
 from json import loads
-from django.db.utils import IntegrityError
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import requests
@@ -148,7 +147,7 @@ def create_participants(data, match, user):
 
 def get_match_info(match, user):
 
-    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matches/{match.matchid}?api_key={api_key}') as response:
+    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matches/{match.matchid}?api_key={os.environ['api_key']}') as response:
         html = response.read()
         data = loads(html)
 
