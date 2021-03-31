@@ -27,7 +27,7 @@ SECRET_KEY = os.environ['secret']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://tiltproof.herokuapp.com/']
+ALLOWED_HOSTS = ['tiltproof.herokuapp.com']
 
 
 # Application definition
