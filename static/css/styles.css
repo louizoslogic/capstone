@@ -1,0 +1,90 @@
+body{
+  overflow: auto;
+  background-color: steelblue;
+}
+.page-header{
+  text-align: center;
+  border:1px solid black;
+  font: bold;
+}
+.nav{
+  display: flex;
+  width: 75vw;
+  margin:0 auto;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.welcomeHeading{
+  font-size: 20px;
+
+}
+.customBtn{
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 10%;
+}
+.container{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin:0%; 
+}
+.data{
+  display: flex;
+  flex-direction: column;
+  background-color: whitesmoke;
+  border-radius: 25px; 
+}
+.stats{ 
+  text-align: center;
+}
+.match{
+  display:flex;
+  justify-content: center;
+  padding: 5px; 
+  width: fit-content
+}
+.team{
+  display: flex;
+  flex-direction: column;
+  border: 0px;
+  padding: 5px;
+  background-color: silver;
+}
+.left{
+  border-radius: 25px 0px 0px 25px;
+}
+.right{
+  border-radius: 0px 25px 25px 0px;
+}
+.participant{
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+.participantLeft{
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  width: 300px;
+}
+.participantStats{ 
+  padding: 5px;
+}
+.participantStatsLeft{
+  padding: 5px;
+  text-align: right;
+}
+li{
+  list-style: none;  
+}
+hr{
+  border:4px solid black;
+  border-radius: 50%;
+}

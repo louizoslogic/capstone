@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1>Signup</h1>
+    <form action="{% url 'accounts:register' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" required placeholder="username" />
+        <input type="password" name="password" required placeholder="password" />
+        <input type="email" name="email" required placeholder="email" />
+        <h1>Riot information</h1>
+        <input type="text" name="summonername" require placeholder="summonername"/>
+        <select name = "region" require aria-placeholder="NA1">
+          <option value = "BR1" selected>BR1</option>
+          <option value = "EUN1">EUN1</option>
+          <option value = "EUW1">EUW1</option>
+          <option value = "JP1" selected>JP1</option>
+          <option value = "KR" selected>KR</option>
+          <option value = "LA1" selected>LA1</option>
+          <option value = "LA2" selected>LA2</option>
+          <option value = "NA1" selected>NA1</option>
+          <option value = "OC1" selected>OC1</option>
+          <option value = "RU" selected>RU</option>
+          <option value="TR1">TR1</option>
+        </select>
+        <button type="submit">Sign up</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% for match in matches %}
+<div class='data'>
+    
+    <div class='stats'>{{ match.win }} | {{ match.userparticipant.lane }}</div>
+    
+    <div class="match">
+        <div class='team left'>
+            
+            <div class='participantLeft'>
+                
+                <div class='participantStatsLeft'>
+                    <div>{{ match.participant1.summoner }}</div> 
+                    <div>{{match.participant1.championname}} | {{ match.participant1.lane }}</div>
+                    <div>({{ match.participant1.kills }}/{{ match.participant1.deaths }}/{{ match.participant1.assists }})</div>
+                </div>
+                
+                <div class='participantIcon'><img src="{{ match.participant1.championicon }}" /></div>
+            </div>
+            
+            <div class='participantLeft'>
+            
+                <div class='participantStatsLeft'>
+                    <div>{{ match.participant2.summoner }}</div> 
+                    <div>{{match.participant2.championname}} | {{ match.participant2.lane }}</div>
+                    <div>({{ match.participant2.kills }}/{{ match.participant2.deaths }}/{{ match.participant2.assists }})</div>
+                </div>
+            
+                <div class='participantIcon'><img src="{{ match.participant2.championicon }}"/></div>
+            
+            </div>
+            
+            <div class='participantLeft'>
+            
+                <div class='participantStatsLeft'>
+                    <div>{{ match.participant3.summoner }}</div> 
+                    <div>{{match.participant3.championname}} | {{ match.participant3.lane }}</div>
+                    <div>({{ match.participant3.kills }}/{{ match.participant3.deaths }}/{{ match.participant3.assists }})</div>
+                </div>
+            
+                <div class='participantIcon'><img src="{{ match.participant3.championicon }}"/></div>
+            
+            </div>
+                    
+            <div class='participantLeft'>
+            
+                <div class='participantStatsLeft'>
+                    <div>{{ match.participant4.summoner }}</div> 
+                    <div>{{match.participant4.championname}} | {{ match.participant4.lane }}</div>
+                    <div>({{ match.participant4.kills }}/{{ match.participant4.deaths }}/{{ match.participant4.assists }})</div>
+                </div>
+            
+                <div class='participantIcon'><img src="{{ match.participant4.championicon }}"/></div>
+            </div>
+
+            <div class='participantLeft'>
+            
+                <div class='participantStatsLeft'>
+                    <div>{{ match.participant5.summoner }}</div> 
+                    <div>{{match.participant5.championname}} | {{ match.participant5.lane }}</div>
+                    <div>({{ match.participant5.kills }}/{{ match.participant5.deaths }}/{{ match.participant5.assists }})</div>
+                </div>
+                        
+                <div class='participantIcon'><img src="{{ match.participant5.championicon }}"/></div>
+            </div>
+        </div>
+            <div class='team right'>
+                
+                <div class='participant'>
+                    
+                    <div class='participantIcon'><img src="{{ match.participant6.championicon }}"/></div>
+
+                    <div class='participantStats right'>
+                        <div>{{ match.participant6.summoner }}</div> 
+                        <div>{{match.participant6.championname}} | {{ match.participant6.lane }}</div>
+                        <div>({{ match.participant6.kills }}/{{ match.participant6.deaths }}/{{ match.participant6.assists }})</div>
+                    </div>
+                
+                </div>
+                <div class='participant'>
+
+                    <div class='participantIcon'><img src="{{ match.participant7.championicon }}"/></div>
+
+                    <div class='participantStats right'>
+                        <div>{{ match.participant7.summoner }}</div> 
+                        <div>{{match.participant7.championname}} | {{ match.participant7.lane }}</div>
+                        <div>({{ match.participant7.kills }}/{{ match.participant7.deaths }}/{{ match.participant7.assists }})</div>
+                    </div>
+
+                </div>
+                <div class='participant'>
+
+                    <div class='participantIcon'><img src="{{ match.participant8.championicon }}"/></div>
+                    
+                    <div class='participantStats right'>
+                        <div>{{ match.participant8.summoner }}</div> 
+                        <div>{{match.participant8.championname}} | {{ match.participant8.lane }}</div>
+                        <div>({{ match.participant8.kills }}/{{ match.participant8.deaths }}/{{ match.participant8.assists }})</div>
+                    </div>
+                
+                </div>
+                <div class='participant'>
+                    
+                    <div class='participantIcon'><img src="{{ match.participant9.championicon }}"/></div>
+
+
+                    <div class='participantStats right'>
+                        <div>{{ match.participant9.summoner }}</div> 
+                        <div>{{match.participant9.championname}} | {{ match.participant9.lane }}</div>
+                        <div>({{ match.participant9.kills }}/{{ match.participant9.deaths }}/{{ match.participant9.assists }})</div>
+                    </div>
+
+                </div>
+                <div class='participant'>
+                
+                <div class='participantIcon'><img src="{{ match.participant10.championicon }}"/></div>
+
+                    <div class='participantStats right'>
+                        <div>{{ match.participant10.summoner }}</div> 
+                        <div>{{match.participant10.championname}} | {{ match.participant10.lane }}</div>
+                        <div>({{ match.participant10.kills }}/{{ match.participant10.deaths }}/{{ match.participant10.assists }})</div>
+                    </div>
+                </div> 
+            </div>
+    </div>   
+</div>
+
+    <hr>
+{% endfor %}
+{% endblock %}

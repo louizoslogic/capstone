@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width = device-width, initial-
+  scale = 1"> 
+  <link rel ="stylesheet" href="{% static 'css/styles.css' %}">
+  <link href="https://pagecdn.io/lib/normalize/8.0.1/normalize.css" rel="stylesheet" crossorigin="anonymous"  >
+  <title>{% block title %}SkillTrack{% endblock %}</title>
+</head>
+<body>
+  <div class="page-header">
+    <h1>Skilltrack</h1>
+  </div>
+  {% block sidebar %}
+  <nav>
+      <div class='nav'>
+        {% if user.is_authenticated %}
+          <div class='welcomeHeading'>
+            <p>Game on {{ user.summonername }}!</p>
+          </div>
+          <div class='link'>
+          <p>
+            <a href="{% url 'accounts:logout' %}" class="customBtn" role="button">Log Out</a>
+          </p>
+        </div>
+
+          {% else %}
+          <p>You are not logged in</p>
+            <a href="{% url 'accounts:login' %}" class="customBtn" role="button">Log in</a>
+            <a href="{% url 'accounts:signup' %}" class="customBtn" role="button">Sign Up</a>
+        {% endif %}
+      </div class='nav'>
+
+  </nav>
+  {% endblock %}
+  <div class='container'>
+    {% block content %}
+
+    {% endblock %}
+  </div>
+</body>
+</html>
