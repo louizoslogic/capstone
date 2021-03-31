@@ -25,11 +25,12 @@
             <a href="{% url 'accounts:logout' %}" class="customBtn" role="button">Log Out</a>
           </p>
         </div>
-
-          {% else %}
+        {% else %}
+        <div class='welcomeHeading'>
           <p>You are not logged in</p>
-            <a href="{% url 'accounts:login' %}" class="customBtn" role="button">Log in</a>
-            <a href="{% url 'accounts:signup' %}" class="customBtn" role="button">Sign Up</a>
+        </div>
+          <a href="{% url 'accounts:login' %}" class="customBtn" role="button">Log in</a>
+          <a href="{% url 'accounts:signup' %}" class="customBtn" role="button">Sign Up</a>
         {% endif %}
       </div class='nav'>
 
