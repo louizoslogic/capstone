@@ -27,7 +27,7 @@ SECRET_KEY = os.environ['secret']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://tiltproof.herokuapp.com/']
 
 
 # Application definition
@@ -131,3 +131,7 @@ LOGOUT_REDIRECT_URL = 'home'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.config()}
