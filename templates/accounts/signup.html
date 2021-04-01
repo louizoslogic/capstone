@@ -3,14 +3,21 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <div class="jumbotron">
+  <div>
     <h1>Signup</h1>
-    <form action="{% url 'accounts:register' %}" method="post">
+    {% if messages %}
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    {% endif %}
+
+    <form onsubmit="showDiv()" action="{% url 'accounts:register' %}" method="post">
         {% csrf_token %}
         <input type="text" name="username" required placeholder="username" />
         <input type="password" name="password" required placeholder="password" />
         <input type="email" name="email" required placeholder="email" />
         <h1>Riot information</h1>
+        <h2>This is your in game name not your riot id</h2>
         <input type="text" name="summonername" require placeholder="summonername"/>
         <select name = "region" require aria-placeholder="NA1">
           <option value = "BR1" selected>BR1</option>
@@ -28,4 +35,12 @@
         <button type="submit">Sign up</button>
     </form>
   </div>
+  <div id='loading'>We are contacting Riot</div>
+  <script>
+    let showDiv=function() {
+      let loadingDiv = document.getElementById('loading')
+      loadingDiv.style.display='block'
+    }
+  
+  </script>
 {% endblock %}

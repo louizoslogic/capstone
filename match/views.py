@@ -8,10 +8,21 @@ from django.http import HttpResponse
 import requests
 
 
+def is_os():
+    # Checks where to find keys from
+
+    if 'api_key' in os.environ:
+        return os.environ["api_key"]
+
+    else:
+        from secret import api_key
+        return api_key
+
+
 @login_required
 def match(request):
 
-    matches = list(get_matches(request.user))
+    matches = get_matches(request.user)
 
     def get_matchid(obj):
         return obj.matchid
@@ -32,27 +43,27 @@ def match(request):
     return render(request, 'match/matches.html', context)
 
 
-def get_matches(User):
+def get_matches(User: object) -> list:
+    # gets list of matches associated with user referenced
 
-    matches = Match.objects.filter(user=User)
-
-    return matches
+    return list(Match.objects.filter(user=User))
 
 
 def updatedb(request):
 
-    update_database(request.user)
     user = request.user
+    update_database(user)
 
     return HttpResponse(user.summonername)
 
 
-def update_database(User):
-    print('hellworld')
-    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/{User.accountId}?api_key={os.environ["api_key"]}') as response:
+def update_database(User: object):
+    # sends request to Riot API for recent matches
+
+    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matchlists/by-account/{User.accountId}?api_key={is_os()}') as response:
         html = response.read()
         data = loads(html)
-        matches = list(get_matches(User))
+        matches = get_matches(User)
         for i in range(5):
             verify = False
             for match in matches:
@@ -64,15 +75,16 @@ def update_database(User):
                 get_match_info(match, User)
 
 
-def get_champion_name(id):
+def get_champion_name(id:str) -> str:
+    # sends request to cdragon for champion associated with ID
+
     response = requests.get(f'https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/{id}.json')
     data = response.json()
     return data['name']
 
 
-def create_participants(data, match, user):
-
-    # Creating participant objects associated with match
+def create_participants(data, match: object, user: object):
+    # adds associated variables for all 10 participants in game, assigns userparticipant
 
     match.participant1 = Participant.objects.create()
     match.participant2 = Participant.objects.create()
@@ -100,8 +112,6 @@ def create_participants(data, match, user):
 
     for i, participant in enumerate(participants):
 
-        # finds participant info
-
         participant.summoner = data['participantIdentities'][i]['player']['summonerName']
         participant.championid = data['participants'][i]['championId']
         participant.championname = get_champion_name(participant.championid)
@@ -114,7 +124,6 @@ def create_participants(data, match, user):
         # participant.spell1Id = data['participants'][i]['spell1Id']
         # participant.spell2Id = data['participants'][i]['spell2Id']
 
-        # saves
         participant.save()
 
         # associating a participant with the logged on user
@@ -130,8 +139,10 @@ def create_participants(data, match, user):
             match.userparticipant.kills = participant.kills
             match.userparticipant.deaths = participant.deaths
             match.userparticipant.assists = participant.assists
+
             # match.userparticipant.spell1Id = participant.spell1Id
             # match.userparticipant.spell2Id = participant.spell2Id
+
             if participant.win is True:
                 match.win = 'Victory'
             else:
@@ -147,7 +158,7 @@ def create_participants(data, match, user):
 
 def get_match_info(match, user):
 
-    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matches/{match.matchid}?api_key={os.environ["api_key"]}') as response:
+    with urllib.request.urlopen(f'https://na1.api.riotgames.com/lol/match/v4/matches/{match.matchid}?api_key={is_os()}') as response:
         html = response.read()
         data = loads(html)
 
